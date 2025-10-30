@@ -4,7 +4,7 @@ import static lotto.constant.ErrorMessage.*;
 
 public class Validator {
     public static void validateNotBlank(String inputValue) {
-        if (inputValue == "" || inputValue == " "){
+        if (inputValue == null || inputValue.isBlank()){
             throw new IllegalArgumentException(NULL_OR_EMPTY_ERROR.getErrorMessage());
         }
     }
