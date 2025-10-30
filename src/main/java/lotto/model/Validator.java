@@ -9,7 +9,7 @@ public class Validator {
         }
     }
 
-    public static void validateNumericAmount(int inputValue) {
+    public static void validateNotMultipleOfThousand(int inputValue) {
         if (inputValue % 1000 == 0){
             throw new IllegalArgumentException(NOT_MULTIPLE_OF_1000_ERROR.getErrorMessage());
         }

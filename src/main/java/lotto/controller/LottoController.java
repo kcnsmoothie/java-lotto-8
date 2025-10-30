@@ -25,7 +25,7 @@ public class LottoController {
         // String을 int로 형변환
         int purchaseAmount = Parser.stringToInt(inputPurchaseAmount);
         // int값이 올바른지 유효성 검증
-        Validator.validateNumericAmount(purchaseAmount);
+        Validator.validateNotMultipleOfThousand(purchaseAmount);
         //입력값 반환
         return purchaseAmount;
     }
