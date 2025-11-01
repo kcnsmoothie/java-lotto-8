@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.List;
 import lotto.model.LottoService;
 import lotto.model.Parser;
 import lotto.model.Validator;
@@ -15,18 +16,23 @@ public class LottoController {
     }
 
     public void run() {
-
+        getPurchaseAmount();
+        getWinningNumber();
     }
 
     public int getPurchaseAmount() {
         String inputPurchaseAmount = inputView.inputPurchaseAmount();
-        //빈값 혹은 null인지 검증
         Validator.validateNotBlank(inputPurchaseAmount);
-        // String을 int로 형변환
         int purchaseAmount = Parser.stringToInt(inputPurchaseAmount);
-        // int값이 올바른지 유효성 검증
         Validator.validateNotMultipleOfThousand(purchaseAmount);
-        //입력값 반환
         return purchaseAmount;
+    }
+
+    public void getWinningNumber() {
+        String inputWinningNumber = inputView.inputWinningNumber();
+        Validator.validateNotBlank(inputWinningNumber);
+        List<String> parsedWinningNumber = Parser.parseWinningNumber(inputWinningNumber);
+        List<Integer> winningNumber = Parser.stringListToIntList(parsedWinningNumber);
+        Validator.validateWinningNumber(winningNumber);
     }
 }
