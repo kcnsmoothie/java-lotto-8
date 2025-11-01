@@ -29,6 +29,7 @@ public class Validator {
     }
 
     public static void validateBonusNumber(List<Integer> winningNumber, int bonusNumber) {
+        winningNumber.add(bonusNumber);
         validateNumberDuplicate(winningNumber);
         validateNumberRange(bonusNumber);
     }

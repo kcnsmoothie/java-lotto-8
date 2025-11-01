@@ -1,5 +1,6 @@
 package lotto.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import lotto.model.LottoService;
@@ -36,15 +37,13 @@ public class LottoController {
         List<String> parsedWinningNumber = Parser.parseWinningNumber(inputWinningNumber);
         List<Integer> winningNumber = Parser.stringListToIntList(parsedWinningNumber);
         Validator.validateWinningNumber(winningNumber);
-        return winningNumber;
+        return new ArrayList<>(winningNumber);
     }
 
     public int getBonusNumber(List<Integer> winningNumber) {
         String inputBonusNumber = inputView.inputBonusNumber();
         Validator.validateNotBlank(inputBonusNumber);
         int bonusNumber = Parser.stringToInt(inputBonusNumber);
-        //기존 당첨 번호 리스트에 보너스 값을 추가해주기
-        winningNumber.add(bonusNumber);
         Validator.validateBonusNumber(winningNumber,bonusNumber);
         return bonusNumber;
     }
