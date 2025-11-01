@@ -6,17 +6,17 @@ import static lotto.constant.ViewMessage.*;
 public class InputView {
 
     public String inputPurchaseAmount() {
-        System.out.println(PURCHASE_AMOUNT_MESSAGE.getInputMessage());
+        System.out.println(PURCHASE_AMOUNT_MESSAGE.getViewMessage());
         return Console.readLine();
     }
 
     public String inputWinningNumber() {
-        System.out.println(WINNING_NUMBER_MESSAGE.getInputMessage());
+        System.out.println(WINNING_NUMBER_MESSAGE.getViewMessage());
         return Console.readLine();
     }
 
     public String inputBonusNumber() {
-        System.out.println(BONUS_NUMBER_MESSAGE.getInputMessage());
+        System.out.println(BONUS_NUMBER_MESSAGE.getViewMessage());
         return Console.readLine();
     }
 }

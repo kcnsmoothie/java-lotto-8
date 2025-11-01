@@ -7,18 +7,22 @@ import lotto.model.LottoService;
 import lotto.model.Parser;
 import lotto.model.Validator;
 import lotto.view.InputView;
+import lotto.view.OutputView;
 
 public class LottoController {
     private final InputView inputView;
+    private final OutputView outputView;
     private final LottoService lottoService;
 
-    public LottoController(InputView inputView,LottoService lottoService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
         this.inputView = inputView;
+        this.outputView = outputView;
         this.lottoService = lottoService;
     }
 
     public void run() {
         int purchaseAmount = getPurchaseAmount();
+        outputView.printPurchaseResult(purchaseAmount);
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
     }
@@ -26,8 +30,9 @@ public class LottoController {
     public int getPurchaseAmount() {
         String inputPurchaseAmount = inputView.inputPurchaseAmount();
         Validator.validateNotBlank(inputPurchaseAmount);
-        int purchaseAmount = Parser.stringToInt(inputPurchaseAmount);
-        Validator.validateNotMultipleOfThousand(purchaseAmount);
+        int parsedPurchaseAmount = Parser.stringToInt(inputPurchaseAmount);
+        Validator.validateNotMultipleOfThousand(parsedPurchaseAmount);
+        int purchaseAmount = lottoService.calculatePurchasableLottoCount(parsedPurchaseAmount);
         return purchaseAmount;
     }
 
