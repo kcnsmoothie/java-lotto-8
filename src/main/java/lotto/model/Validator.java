@@ -28,6 +28,11 @@ public class Validator {
         }
     }
 
+    public static void validateBonusNumber(List<Integer> winningNumber, int bonusNumber) {
+        validateNumberDuplicate(winningNumber);
+        validateNumberRange(bonusNumber);
+    }
+
     public static void validateWinningNumbersSize(List<Integer> winningNumber){
         if(winningNumber.size() != 6){
             throw new IllegalArgumentException(ErrorMessage.INVALID_WINNING_NUMBER_SIZE_ERROR.getErrorMessage());
