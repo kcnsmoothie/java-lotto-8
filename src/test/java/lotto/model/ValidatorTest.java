@@ -29,4 +29,37 @@ public class ValidatorTest {
         assertThatThrownBy(() -> Validator.validateNotMultipleOfThousand(inputValue))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("입력한 당첨 번호가 6개 미만인지 검사")
+    void validateWinningNumbersSize_test() {
+        //given
+        List<Integer> list = Arrays.asList(1,2,3,4);
+
+        //when & then
+        assertThatThrownBy(() -> Validator.validateWinningNumbersSize(list))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력한 당첨 번호가 1~45사이인지 검사")
+    void validateNumberRange_test() {
+        //given
+        int value = 72;
+
+        //when & then
+        assertThatThrownBy(() -> Validator.validateNumberRange(value))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("입력한 당첨 번호 중복 검사")
+    void validateNumberDuplicate_test() {
+        //given
+        List<Integer> list = Arrays.asList(1,2,3,4,5,4);
+
+        //when & then
+        assertThatThrownBy(() -> Validator.validateNumberDuplicate(list))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
