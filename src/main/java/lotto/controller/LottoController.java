@@ -27,11 +27,11 @@ public class LottoController {
     public void run() {
         int purchaseAmount = getPurchaseAmount();
         outputView.printPurchaseResult(purchaseAmount);
+        List<Lotto> lottos = lottoService.lottoMaker(purchaseAmount);
+        outputView.printLotto(lottos);
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
-        List<Lotto> lottos = lottoService.lottoMaker(purchaseAmount);
         Map<Rank, Integer> rankResult = getRankResult(lottos, winningNumber, bonusNumber);
-
     }
 
     public int getPurchaseAmount() {
