@@ -110,10 +110,10 @@ public class LottoServiceTest {
         rankResult.put(Rank.SIX_MATCH, 0);             // 6개 맞음: 0개
 
         // when
-        long result = lottoService.calculateTotalPrize(rankResult);
+        double result = lottoService.calculateTotalPrize(rankResult);
 
         // then
-        long expectedResult = 1 * Rank.THREE_MATCH.getPrize() +
+        double expectedResult = 1 * Rank.THREE_MATCH.getPrize() +
                         2 * Rank.FOUR_MATCH.getPrize() +
                         0 * Rank.FIVE_MATCH.getPrize() +
                         1 * Rank.FIVE_PLUS_BONUS_MATCH.getPrize() +

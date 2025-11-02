@@ -27,4 +27,8 @@ public class OutputView {
         System.out.println(SECOND_PLACE_MESSAGE.getViewMessage(rankResult.getOrDefault(FIVE_PLUS_BONUS_MATCH, 0)));
         System.out.println(FIRST_PLACE_MESSAGE.getViewMessage(rankResult.getOrDefault(SIX_MATCH, 0)));
     }
+
+    public void printTotalProfitRate(double profitRate) {
+        System.out.println(TOTAL_PROFIT_RATE_MESSAGE.getViewMessage(profitRate));
+    }
 }

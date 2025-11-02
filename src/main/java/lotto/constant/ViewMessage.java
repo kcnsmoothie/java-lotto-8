@@ -26,7 +26,11 @@ public enum ViewMessage {
         return viewMessage;
     }
 
-    public String getViewMessage(Integer value) {
+    public String getViewMessage(int value) {
+        return String.format(viewMessage, value);
+    }
+
+    public String getViewMessage(double value) {
         return String.format(viewMessage, value);
     }
 }

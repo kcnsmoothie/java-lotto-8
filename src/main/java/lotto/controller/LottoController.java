@@ -26,13 +26,16 @@ public class LottoController {
 
     public void run() {
         int purchaseAmount = getPurchaseAmount();
-        outputView.printPurchaseResult(purchaseAmount);
-        List<Lotto> lottos = lottoService.lottoMaker(purchaseAmount);
+        int lottoCount = lottoService.calculatePurchasableLottoCount(purchaseAmount);
+        outputView.printPurchaseResult(lottoCount);
+        List<Lotto> lottos = lottoService.lottoMaker(lottoCount);
         outputView.printLotto(lottos);
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
         Map<Rank, Integer> rankResult = getRankResult(lottos, winningNumber, bonusNumber);
         outputView.printRankResult(rankResult);
+        double profitRate = getProfitRate(rankResult, lottoCount);
+        outputView.printTotalProfitRate(profitRate);
     }
 
     public int getPurchaseAmount() {
@@ -40,8 +43,7 @@ public class LottoController {
         Validator.validateNotBlank(inputPurchaseAmount);
         int parsedPurchaseAmount = Parser.stringToInt(inputPurchaseAmount);
         Validator.validateNotMultipleOfThousand(parsedPurchaseAmount);
-        int purchaseAmount = lottoService.calculatePurchasableLottoCount(parsedPurchaseAmount);
-        return purchaseAmount;
+        return parsedPurchaseAmount;
     }
 
     public List<Integer> getWinningNumber() {
@@ -64,7 +66,7 @@ public class LottoController {
     public Map<Rank, Integer> getRankResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
         Map<Rank, Integer> lottoResult = new LinkedHashMap<>();
         for (Rank rank : Rank.values()) {
-            lottoResult.put(rank, 0); // 초기값 0
+            lottoResult.put(rank, 0);
         }
         for (Lotto lotto : lottos) {
             int matchCount = lottoService.calculateMatchCount(winningNumbers, lotto.getNumbers());
@@ -75,5 +77,11 @@ public class LottoController {
             }
         }
         return lottoResult;
+    }
+
+    public double getProfitRate(Map<Rank, Integer> rankResult,int lottoCount) {
+        double totalPrize = lottoService.calculateTotalPrize(rankResult);
+        double profitRate = lottoService.calculateProfitRate(totalPrize,lottoCount);
+        return profitRate;
     }
 }
