@@ -66,4 +66,32 @@ public class LottoServiceTest {
         // then
         assertThat(lottos).hasSize(lottoCount);
     }
+
+    @Test
+    @DisplayName("구매한 로또 번호와 당첨 번호 중 일치하는 숫자의 개수 검사")
+    void calcualteMatchCount_test(){
+        // given
+        List<Integer> winningNumber = Arrays.asList(1,2,3,4,5,6);
+        List<Integer> lotto = Arrays.asList(1,4,3,2,5,8);
+
+        // when
+        int result = lottoService.calculateMatchCount(winningNumber,lotto);
+
+        // then
+        assertThat(result).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 포함되어있는지 계산해주는 검사")
+    void checkBonusNumber_test(){
+        // given
+        List<Integer> lotto = Arrays.asList(1,2,3,4,5,6);
+        int bonusNumber = 1;
+
+        // when
+        boolean result = lottoService.checkBonusNumber(lotto, bonusNumber);
+
+        // then
+        assertThat(result).isEqualTo(true);
+    }
 }
