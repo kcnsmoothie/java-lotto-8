@@ -3,6 +3,7 @@ package lotto.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import lotto.Lotto;
 import lotto.model.LottoService;
 import lotto.model.Parser;
 import lotto.model.Validator;
@@ -25,6 +26,7 @@ public class LottoController {
         outputView.printPurchaseResult(purchaseAmount);
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
+        lottoService.lottoMaker(purchaseAmount);
     }
 
     public int getPurchaseAmount() {

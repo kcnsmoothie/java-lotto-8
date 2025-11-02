@@ -2,6 +2,7 @@ package lotto.model;
 
 import static lotto.constant.ErrorMessage.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,8 +30,9 @@ public class Validator {
     }
 
     public static void validateBonusNumber(List<Integer> winningNumber, int bonusNumber) {
-        winningNumber.add(bonusNumber);
-        validateNumberDuplicate(winningNumber);
+        List<Integer> tempList = new ArrayList<>(winningNumber);
+        tempList.add(bonusNumber);
+        validateNumberDuplicate(tempList);
         validateNumberRange(bonusNumber);
     }
 
