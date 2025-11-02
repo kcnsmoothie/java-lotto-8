@@ -2,8 +2,11 @@ package lotto.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.Lotto;
+import lotto.constant.Rank;
 import lotto.model.LottoService;
 import lotto.model.Parser;
 import lotto.model.Validator;
@@ -26,7 +29,9 @@ public class LottoController {
         outputView.printPurchaseResult(purchaseAmount);
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
-        lottoService.lottoMaker(purchaseAmount);
+        List<Lotto> lottos = lottoService.lottoMaker(purchaseAmount);
+        Map<Rank, Integer> rankResult = getRankResult(lottos, winningNumber, bonusNumber);
+
     }
 
     public int getPurchaseAmount() {
@@ -51,7 +56,23 @@ public class LottoController {
         String inputBonusNumber = inputView.inputBonusNumber();
         Validator.validateNotBlank(inputBonusNumber);
         int bonusNumber = Parser.stringToInt(inputBonusNumber);
-        Validator.validateBonusNumber(winningNumber,bonusNumber);
+        Validator.validateBonusNumber(winningNumber, bonusNumber);
         return bonusNumber;
+    }
+
+    public Map<Rank, Integer> getRankResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+        Map<Rank, Integer> lottoResult = new LinkedHashMap<>();
+        for (Rank rank : Rank.values()) {
+            lottoResult.put(rank, 0); // 초기값 0
+        }
+        for (Lotto lotto : lottos) {
+            int matchCount = lottoService.calculateMatchCount(winningNumbers, lotto.getNumbers());
+            boolean bonusMatched = (matchCount == 5) && lottoService.checkBonusNumber(lotto.getNumbers(), bonusNumber);
+            Rank rank = lottoService.determineRank(matchCount, bonusMatched);
+            if (rank != null) {
+                lottoResult.put(rank, lottoResult.get(rank) + 1);
+            }
+        }
+        return lottoResult;
     }
 }
