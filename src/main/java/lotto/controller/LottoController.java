@@ -32,6 +32,7 @@ public class LottoController {
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
         Map<Rank, Integer> rankResult = getRankResult(lottos, winningNumber, bonusNumber);
+        outputView.printRankResult(rankResult);
     }
 
     public int getPurchaseAmount() {
