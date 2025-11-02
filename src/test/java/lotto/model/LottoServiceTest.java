@@ -5,8 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import lotto.Lotto;
+import lotto.constant.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -93,5 +96,29 @@ public class LottoServiceTest {
 
         // then
         assertThat(result).isEqualTo(true);
+    }
+
+    @Test
+    @DisplayName("총 상금 계산 검사")
+    void calculateTotalPrize_test(){
+        // given
+        Map<Rank, Integer> rankResult = new LinkedHashMap<>();
+        rankResult.put(Rank.THREE_MATCH, 1);           // 3개 맞음: 1개
+        rankResult.put(Rank.FOUR_MATCH, 2);            // 4개 맞음: 2개
+        rankResult.put(Rank.FIVE_MATCH, 0);            // 5개 맞음: 0개
+        rankResult.put(Rank.FIVE_PLUS_BONUS_MATCH, 1); // 5+보너스: 1개
+        rankResult.put(Rank.SIX_MATCH, 0);             // 6개 맞음: 0개
+
+        // when
+        long result = lottoService.calculateTotalPrize(rankResult);
+
+        // then
+        long expectedResult = 1 * Rank.THREE_MATCH.getPrize() +
+                        2 * Rank.FOUR_MATCH.getPrize() +
+                        0 * Rank.FIVE_MATCH.getPrize() +
+                        1 * Rank.FIVE_PLUS_BONUS_MATCH.getPrize() +
+                        0 * Rank.SIX_MATCH.getPrize();
+
+        assertThat(result).isEqualTo(expectedResult);
     }
 }
