@@ -24,18 +24,18 @@ public class LottoService {
         return randomLottoNumber;
     }
 
-    public void sortAscending(List<Integer> randomLottoNumber) {
-        List<Integer> sorted = randomLottoNumber.stream()
+    public List<Integer> sortAscending(List<Integer> randomLottoNumber) {
+        return randomLottoNumber.stream()
                 .sorted()
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Lotto> lottoMaker(int lottoCount){
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             List<Integer> numbers = makeRandomLottoNumbers();
-            sortAscending(numbers);
-            lottos.add(new Lotto(numbers));
+            List<Integer> sortedNumbers = sortAscending(numbers);
+            lottos.add(new Lotto(sortedNumbers));
         }
         return lottos;
     }
@@ -76,7 +76,9 @@ public class LottoService {
     }
 
     public double calculateProfitRate(double totalPrize, int purchaseAmount) {
-        double profitRate = totalPrize / (double) purchaseAmount;
-        return Math.round(profitRate) / 10.0;
+        System.out.println(totalPrize);
+        System.out.println(purchaseAmount);
+        double profitRate = (totalPrize / (double) purchaseAmount)*100 ;
+        return profitRate;
     }
 }
