@@ -36,7 +36,9 @@ public class LottoService {
 
     //오름차순으로 로또를 정렬하는 기능
     public void sortAscending(List<Integer> randomLottoNumber) {
-        Collections.sort(randomLottoNumber);
+        List<Integer> sorted = randomLottoNumber.stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     //발행 수량만큼 로또 발행
@@ -72,5 +74,28 @@ public class LottoService {
     public boolean checkBonusNumber(List<Integer> lotto,int bonusNumber) {
         boolean isBonusMatched = lotto.contains(bonusNumber);
         return isBonusMatched;
+    }
+
+    //등수당 상금 계산
+    private double calculateEntryPrize(Map.Entry<Rank, Integer> entry) {
+        if (entry.getValue() == 0) {
+            return 0;
+        }
+        return entry.getKey().getPrize() * entry.getValue();
+    }
+
+    //총 상금 계산
+    public double calculateTotalPrize(Map<Rank, Integer> rankResult) {
+        double totalPrize = 0;
+        for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
+            totalPrize += calculateEntryPrize(entry);
+        }
+        return totalPrize;
+    }
+
+    //로또 구입금액과 비율 계산
+    public double calculateProfitRate(double totalPrize, int purchaseAmount) {
+        double profitRate = totalPrize / (double) purchaseAmount;
+        return Math.round(profitRate) / 10.0;
     }
 }
