@@ -76,9 +76,6 @@ public class LottoService {
     }
 
     public double calculateProfitRate(double totalPrize, int purchaseAmount) {
-        System.out.println(totalPrize);
-        System.out.println(purchaseAmount);
-        double profitRate = (totalPrize / (double) purchaseAmount)*100 ;
-        return profitRate;
+        return (totalPrize / (double) purchaseAmount) * 100;
     }
 }
