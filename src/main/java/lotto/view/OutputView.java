@@ -31,4 +31,8 @@ public class OutputView {
     public void printTotalProfitRate(double profitRate) {
         System.out.println(TOTAL_PROFIT_RATE_MESSAGE.getViewMessage(profitRate));
     }
+
+    public static void printErrorMessage(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+    }
 }

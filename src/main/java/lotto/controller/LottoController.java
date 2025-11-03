@@ -1,15 +1,14 @@
 package lotto.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.Lotto;
 import lotto.constant.Rank;
 import lotto.model.LottoService;
-import lotto.model.Parser;
-import lotto.model.Validator;
+import lotto.util.Parser;
+import lotto.util.Validator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -39,28 +38,46 @@ public class LottoController {
     }
 
     public int getPurchaseAmount() {
-        String inputPurchaseAmount = inputView.inputPurchaseAmount();
-        Validator.validateNotBlank(inputPurchaseAmount);
-        int parsedPurchaseAmount = Parser.stringToInt(inputPurchaseAmount);
-        Validator.validateNotMultipleOfThousand(parsedPurchaseAmount);
-        return parsedPurchaseAmount;
+        while (true) {
+            try {
+                String inputPurchaseAmount = inputView.inputPurchaseAmount();
+                Validator.validateNotBlank(inputPurchaseAmount);
+                int parsedPurchaseAmount = Parser.stringToInt(inputPurchaseAmount);
+                Validator.validateNotMultipleOfThousand(parsedPurchaseAmount);
+                return parsedPurchaseAmount;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
     }
 
     public List<Integer> getWinningNumber() {
-        String inputWinningNumber = inputView.inputWinningNumber();
-        Validator.validateNotBlank(inputWinningNumber);
-        List<String> parsedWinningNumber = Parser.parseWinningNumber(inputWinningNumber);
-        List<Integer> winningNumber = Parser.stringListToIntList(parsedWinningNumber);
-        Validator.validateWinningNumber(winningNumber);
-        return new ArrayList<>(winningNumber);
+        while (true){
+            try {
+                String inputWinningNumber = inputView.inputWinningNumber();
+                Validator.validateNotBlank(inputWinningNumber);
+                List<String> parsedWinningNumber = Parser.parseWinningNumber(inputWinningNumber);
+                List<Integer> winningNumber = Parser.stringListToIntList(parsedWinningNumber);
+                Validator.validateWinningNumber(winningNumber);
+                return new ArrayList<>(winningNumber);
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
     }
 
     public int getBonusNumber(List<Integer> winningNumber) {
-        String inputBonusNumber = inputView.inputBonusNumber();
-        Validator.validateNotBlank(inputBonusNumber);
-        int bonusNumber = Parser.stringToInt(inputBonusNumber);
-        Validator.validateBonusNumber(winningNumber, bonusNumber);
-        return bonusNumber;
+        while (true) {
+            try {
+                String inputBonusNumber = inputView.inputBonusNumber();
+                Validator.validateNotBlank(inputBonusNumber);
+                int bonusNumber = Parser.stringToInt(inputBonusNumber);
+                Validator.validateBonusNumber(winningNumber, bonusNumber);
+                return bonusNumber;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
     }
 
     public Map<Rank, Integer> getRankResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
