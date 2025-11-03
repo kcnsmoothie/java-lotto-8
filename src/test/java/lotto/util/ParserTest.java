@@ -17,16 +17,6 @@ public class ParserTest {
         assertThatThrownBy(() -> Parser.stringToInt(string))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-    @Test
-    @DisplayName("구분자(,)단위로 파싱 및 순서대로 저장 검사")
-    void parseWinningNumber_test(){
-        //given
-        String string = "1,2,3,4";
-        //when
-        List<String> parsedWinningNumbers = Parser.parseWinningNumber(string);
-        //then
-        assertThat(parsedWinningNumbers).elements(0, 1, 2, 3).contains("1", "2", "3", "4");
-    }
 
     @Test
     @DisplayName("문자열 리스트를 정수형 리스트로 변환해주는 검사")
@@ -37,5 +27,16 @@ public class ParserTest {
         List<Integer> winningNumber = Parser.stringToInt(list);
         //then
         assertThat(winningNumber).elements(0, 1, 2, 3).contains(1,2,3,4);
+    }
+
+    @Test
+    @DisplayName("구분자(,)단위로 파싱 및 순서대로 저장 검사")
+    void parseWinningNumber_test(){
+        //given
+        String string = "1,2,3,4";
+        //when
+        List<String> parsedWinningNumbers = Parser.parseWinningNumber(string);
+        //then
+        assertThat(parsedWinningNumbers).elements(0, 1, 2, 3).contains("1", "2", "3", "4");
     }
 }

@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 import lotto.constant.Rank;
 
 public class LottoService {
-    public LottoService() {
-    }
 
     public int calculatePurchasableLottoCount(int purchaseAmount) {
         return purchaseAmount / LOTTO_PRICE.getValue();
