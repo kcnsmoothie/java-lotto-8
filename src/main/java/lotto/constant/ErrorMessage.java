@@ -2,6 +2,7 @@ package lotto.constant;
 
 public enum ErrorMessage {
 
+    INVALID_NUMBER_FORMAT_ERROR("입력값은 숫자만 입력 가능합니다."),
     NULL_OR_EMPTY_ERROR("입력값은 비워둘 수 없습니다"),
     NOT_MULTIPLE_OF_1000_ERROR("1,000원 단위로만 구매할 수 있습니다"),
     INVALID_WINNING_NUMBER_SIZE_ERROR("당첨 번호는 6개를 입력해야합니다"),
