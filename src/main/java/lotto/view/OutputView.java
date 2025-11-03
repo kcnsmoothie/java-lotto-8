@@ -5,7 +5,7 @@ import static lotto.constant.Rank.*;
 
 import java.util.List;
 import java.util.Map;
-import lotto.Lotto;
+import lotto.model.Lotto;
 import lotto.constant.Rank;
 
 public class OutputView {

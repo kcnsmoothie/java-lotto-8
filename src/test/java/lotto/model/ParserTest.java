@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+import lotto.util.Parser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,7 @@ public class ParserTest {
         //given
         List<String> list = Arrays.asList("1","2","3","4");
         //when
-        List<Integer> winningNumber = Parser.stringListToIntList(list);
+        List<Integer> winningNumber = Parser.stringToInt(list);
         //then
         assertThat(winningNumber).elements(0, 1, 2, 3).contains(1,2,3,4);
     }

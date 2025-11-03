@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.Lotto;
+import lotto.model.Lotto;
 import lotto.constant.Rank;
 import lotto.model.LottoService;
 import lotto.util.Parser;
@@ -46,7 +46,7 @@ public class LottoController {
                 Validator.validateNotMultipleOfThousand(parsedPurchaseAmount);
                 return parsedPurchaseAmount;
             } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
+                OutputView.printErrorMessage(e);
             }
         }
     }
@@ -57,11 +57,11 @@ public class LottoController {
                 String inputWinningNumber = inputView.inputWinningNumber();
                 Validator.validateNotBlank(inputWinningNumber);
                 List<String> parsedWinningNumber = Parser.parseWinningNumber(inputWinningNumber);
-                List<Integer> winningNumber = Parser.stringListToIntList(parsedWinningNumber);
+                List<Integer> winningNumber = Parser.stringToInt(parsedWinningNumber);
                 Validator.validateWinningNumber(winningNumber);
                 return new ArrayList<>(winningNumber);
             } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
+                OutputView.printErrorMessage(e);
             }
         }
     }
@@ -75,7 +75,7 @@ public class LottoController {
                 Validator.validateBonusNumber(winningNumber, bonusNumber);
                 return bonusNumber;
             } catch (IllegalArgumentException e) {
-                outputView.printErrorMessage(e);
+                OutputView.printErrorMessage(e);
             }
         }
     }
@@ -98,7 +98,6 @@ public class LottoController {
 
     public double getProfitRate(Map<Rank, Integer> rankResult,int lottoCount) {
         double totalPrize = lottoService.calculateTotalPrize(rankResult);
-        double profitRate = lottoService.calculateProfitRate(totalPrize,lottoCount);
-        return profitRate;
+        return lottoService.calculateProfitRate(totalPrize,lottoCount);
     }
 }

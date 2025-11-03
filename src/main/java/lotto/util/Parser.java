@@ -15,15 +15,7 @@ public class Parser {
         }
     }
 
-    public static List<String> parseWinningNumber(String inputWinningNumber) {
-        List<String> parsedWinningNumber = new ArrayList<>();
-        Arrays.stream(inputWinningNumber.split(","))
-                .map(String::trim)
-                .forEach(parsedWinningNumber::add);
-        return parsedWinningNumber;
-    }
-
-    public static List<Integer> stringListToIntList(List<String> parsedWinningNumber) {
+    public static List<Integer> stringToInt(List<String> parsedWinningNumber) {
         try {
             return parsedWinningNumber.stream()
                     .map(Integer::parseInt)
@@ -31,5 +23,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_NUMBER_FORMAT_ERROR.getErrorMessage());
         }
+    }
+
+    public static List<String> parseWinningNumber(String inputWinningNumber) {
+        List<String> parsedWinningNumber = new ArrayList<>();
+        Arrays.stream(inputWinningNumber.split(","))
+                .map(String::trim)
+                .forEach(parsedWinningNumber::add);
+        return parsedWinningNumber;
     }
 }
