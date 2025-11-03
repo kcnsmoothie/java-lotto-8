@@ -1,9 +1,6 @@
 package lotto.model;
 
-import static lotto.constant.LottoNumberConstant.LOTTO_NUMBER_SIZE;
-import static lotto.constant.LottoNumberConstant.LOTTO_PRICE;
-import static lotto.constant.LottoNumberConstant.LOTTO_RANGE_MAX;
-import static lotto.constant.LottoNumberConstant.LOTTO_RANGE_MIN;
+import static lotto.constant.LottoNumberConstant.*;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;

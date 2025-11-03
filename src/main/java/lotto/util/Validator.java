@@ -1,12 +1,16 @@
 package lotto.util;
 
 import static lotto.constant.ErrorMessage.*;
+import static lotto.constant.LottoNumberConstant.LOTTO_NUMBER_SIZE;
+import static lotto.constant.LottoNumberConstant.LOTTO_RANGE_MAX;
+import static lotto.constant.LottoNumberConstant.LOTTO_RANGE_MIN;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.constant.ErrorMessage;
+import lotto.constant.LottoNumberConstant.*;
 
 public class Validator {
     public static void validateNotBlank(String inputValue) {
@@ -37,13 +41,13 @@ public class Validator {
     }
 
     public static void validateWinningNumbersSize(List<Integer> winningNumber){
-        if(winningNumber.size() != 6){
+        if(winningNumber.size() != LOTTO_NUMBER_SIZE.getValue()){
             throw new IllegalArgumentException(ErrorMessage.INVALID_WINNING_NUMBER_SIZE_ERROR.getErrorMessage());
         }
     }
 
     public static void validateNumberRange(int number){
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_RANGE_MIN.getValue() || number > LOTTO_RANGE_MAX.getValue()) {
             throw new IllegalArgumentException(INVALID_NUMBER_RANGE_ERROR.getErrorMessage());
         }
     }
