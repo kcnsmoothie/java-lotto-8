@@ -25,6 +25,7 @@ public class LottoController {
         outputView.printLottoQuantity(lottoQuantity);
         List<Lotto> lottos = lottoService.createLotto(lottoQuantity);
         outputView.printPurchasedLotto(lottos);
+        lottoService.createLotto(lottoQuantity);
     }
 
     private int getPurchaseAmount() {
@@ -35,6 +36,26 @@ public class LottoController {
                 int purchaseAmount = Parser.parseStrToInt(inputPurchaseAmount);
                 Validator.validateMutiplesOf1000(purchaseAmount);
                 return purchaseAmount;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+    }
+
+    private List<Integer> getWinningNumber() {
+        while (true) {
+            try {
+                String inputWinningNumber = inputView.inputWinningNumber();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+    }
+
+    private int getBonusNumber() {
+        while (true) {
+            try {
+                String inputBonusNumber = inputView.inputBonusNumber();
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);
             }

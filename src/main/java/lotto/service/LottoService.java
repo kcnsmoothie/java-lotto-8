@@ -17,8 +17,8 @@ public class LottoService {
         for (int i = 0; i < lottoQuantity; i++) {
             List<Integer> numbers = Randoms.pickUniqueNumbersInRange(1, 45, 6);
             Collections.sort(numbers);
-            Lotto lotto = Lotto.randomNumbersOf(numbers);
-            System.out.println(lotto.toString());
+            System.out.println(numbers.toString());
+            Lotto lotto = new Lotto(numbers);
             lottos.add(lotto);
         }
         return lottos;
