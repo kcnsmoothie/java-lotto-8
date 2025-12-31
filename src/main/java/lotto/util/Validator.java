@@ -2,7 +2,7 @@ package lotto.util;
 
 import static lotto.constant.ErrorMessage.MULTIPLES_OF_1000_ERROR;
 import static lotto.constant.ErrorMessage.NULL_OR_EMPTY_ERROR;
-import static lotto.constant.ErrorMessage.NUMBER_NOT_6_ERROR;
+import static lotto.constant.ErrorMessage.NUMBER_DUPLICATE_ERROR;
 import static lotto.constant.ErrorMessage.NUMBER_RANGE_ERROR;
 
 import java.util.List;
@@ -31,7 +31,15 @@ public class Validator {
     public static void validateNotDuplicate(List<Integer> intWinningNumber) {
         //distinct = 중복제거, count = 사이즈
         if (intWinningNumber.size() != intWinningNumber.stream().distinct().count()) {
-            throw new IllegalArgumentException(NUMBER_NOT_6_ERROR.getErrorMessage());
+            throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR.getErrorMessage());
+        }
+    }
+
+    public static void validateBonusNumberDuplicate(int bonusNumber, List<Integer> intWinningNumber) {
+        for (Integer number : intWinningNumber) {
+            if (number == bonusNumber) {
+                throw new IllegalArgumentException(NUMBER_DUPLICATE_ERROR.getErrorMessage());
+            }
         }
     }
 }
