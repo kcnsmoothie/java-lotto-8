@@ -24,8 +24,6 @@ public class LottoController {
         int lottoQuantity = lottoService.calculateLottoQuantity(purchaseAmount);
         outputView.printLottoQuantity(lottoQuantity);
         List<Lotto> lottos = lottoService.createLotto(lottoQuantity);
-        outputView.printPurchasedLotto(lottos);
-        lottoService.createLotto(lottoQuantity);
         List<Integer> winningNumber = getWinningNumber();
     }
 

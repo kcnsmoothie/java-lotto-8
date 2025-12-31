@@ -11,7 +11,6 @@ public class LottoService {
         return purchaseAmount / 1000;
     }
 
-
     public List<Lotto> createLotto(int lottoQuantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {

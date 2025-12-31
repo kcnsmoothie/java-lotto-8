@@ -1,12 +1,14 @@
 package lotto.model;
 
 import java.util.List;
+import lotto.util.Validator;
 
 public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
+        Validator.validateNotDuplicate(numbers);
         this.numbers = numbers;
     }
 
