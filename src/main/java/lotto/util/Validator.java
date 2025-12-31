@@ -8,11 +8,6 @@ import static lotto.constant.ErrorMessage.NUMBER_RANGE_ERROR;
 import java.util.List;
 
 public class Validator {
-    public static void validateWinningNumber(List<Integer> intWinningNumber) {
-        validateNumberRange(intWinningNumber);
-        validateNotDuplicate(intWinningNumber);
-    }
-
     public static void validateNotBlank(String inputValue) {
         if (inputValue == null || inputValue.isBlank()) {
             throw new IllegalArgumentException(NULL_OR_EMPTY_ERROR.getErrorMessage());
