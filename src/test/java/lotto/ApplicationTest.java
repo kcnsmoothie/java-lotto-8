@@ -1,13 +1,12 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import java.util.List;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -47,6 +46,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+        //재입력까지 받는지 검사하는 코드였다. 숨은 테스트 주의하기
     void 예외_테스트() {
         assertSimpleTest(() -> {
             runException("1000j");

@@ -18,13 +18,20 @@ public class LottoController {
     }
 
     public void run() {
-
+        int purchaseAmount = getPurchaseAmount();
     }
 
-    private void getPurchaseAmount() {
-        String inputPurchaseAmount = inputView.inputPurchaseAmount();
-        Validator.validateNotBlank(inputPurchaseAmount);
-        int purchaseAmount = Parser.parseStrToInt(inputPurchaseAmount);
-        Validator.validateMutiplesOf1000(purchaseAmount);
+    private int getPurchaseAmount() {
+        while (true) {
+            try {
+                String inputPurchaseAmount = inputView.inputPurchaseAmount();
+                Validator.validateNotBlank(inputPurchaseAmount);
+                int purchaseAmount = Parser.parseStrToInt(inputPurchaseAmount);
+                Validator.validateMutiplesOf1000(purchaseAmount);
+                return purchaseAmount;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
     }
 }
