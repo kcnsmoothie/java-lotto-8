@@ -46,6 +46,10 @@ public class LottoController {
         while (true) {
             try {
                 String inputWinningNumber = inputView.inputWinningNumber();
+                Validator.validateNotBlank(inputWinningNumber);
+                List<String> parsedWinningNumber = Parser.parseByDelimeter(inputWinningNumber);
+                List<Integer> intWinningNumber = Parser.parseStrToInt(parsedWinningNumber);
+                Validator.validateWinningNumber(intWinningNumber);
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);
             }
