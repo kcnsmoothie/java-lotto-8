@@ -1,6 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
+import java.util.Map;
+import lotto.constant.Rank;
 import lotto.service.Lotto;
 import lotto.service.LottoService;
 import lotto.util.Parser;
@@ -73,5 +75,10 @@ public class LottoController {
                 outputView.printErrorMessage(e);
             }
         }
+    }
+
+    private double getProfitRate(int purchaseAmount) {
+        double totalPrize = lottoService.calculateTotalPrize();
+        double proitRate = lottoService.calculateProfitRate(totalPrize, purchaseAmount);
     }
 }

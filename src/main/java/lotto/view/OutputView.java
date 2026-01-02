@@ -7,6 +7,13 @@ public class OutputView {
         System.out.println(PURCHASE_AMOUNT.getViewMessage(lottoAmount));
     }
 
+    public void printLottoHit() {
+    }
+
+    public void printProfitRate() {
+
+    }
+
     public void printErrorMessage(IllegalArgumentException e) {
         System.out.println(e.getMessage());
     }
