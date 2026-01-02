@@ -18,8 +18,8 @@ public class LottoController {
     }
 
     public void run() {
-        String inputPurchaseAmount = inputView.inputPurchaseAmount();
-        Integer purchaseAmount = Parser.stringToInt(inputPurchaseAmount);
+        int purchaseAmount = getPurchaseAmount();
+        int lottoAmount = lottoService.calculateLottoAmount(purchaseAmount);
     }
 
     private int getPurchaseAmount() {
