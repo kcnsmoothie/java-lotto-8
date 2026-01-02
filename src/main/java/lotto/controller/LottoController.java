@@ -28,7 +28,7 @@ public class LottoController {
             System.out.println(lotto.getNumbers());
         }
         List<Integer> winningNumber = getWinningNumber();
-
+        int bonusNumber = getBonusNumber();
     }
 
     private int getPurchaseAmount() {
@@ -62,5 +62,16 @@ public class LottoController {
         }
     }
 
-
+    private int getBonusNumber() {
+        while (true) {
+            try {
+                String inputBonusNumber = inputView.inputBonusNumber();
+                int bonusNumber = Parser.stringToInt(inputBonusNumber);
+                Validator.validateInRange(bonusNumber);
+                return bonusNumber;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+    }
 }
