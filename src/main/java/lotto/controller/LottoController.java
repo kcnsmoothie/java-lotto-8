@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import lotto.model.Lotto;
 import lotto.constant.Rank;
+import lotto.model.Lotto;
 import lotto.model.LottoService;
 import lotto.util.Parser;
 import lotto.util.Validator;
@@ -27,12 +27,16 @@ public class LottoController {
         int purchaseAmount = getPurchaseAmount();
         int lottoCount = lottoService.calculatePurchasableLottoCount(purchaseAmount);
         outputView.printPurchaseResult(lottoCount);
+
         List<Lotto> lottos = lottoService.lottoMaker(lottoCount);
         outputView.printLotto(lottos);
+
         List<Integer> winningNumber = getWinningNumber();
         int bonusNumber = getBonusNumber(winningNumber);
+
         Map<Rank, Integer> rankResult = getRankResult(lottos, winningNumber, bonusNumber);
         outputView.printRankResult(rankResult);
+
         double profitRate = getProfitRate(rankResult, purchaseAmount);
         outputView.printTotalProfitRate(profitRate);
     }
@@ -52,7 +56,7 @@ public class LottoController {
     }
 
     public List<Integer> getWinningNumber() {
-        while (true){
+        while (true) {
             try {
                 String inputWinningNumber = inputView.inputWinningNumber();
                 Validator.validateNotBlank(inputWinningNumber);
@@ -96,8 +100,8 @@ public class LottoController {
         return lottoResult;
     }
 
-    public double getProfitRate(Map<Rank, Integer> rankResult,int purchaseAmount) {
-        double totalPrize = lottoService.calculateTotalPrize(rankResult);
-        return lottoService.calculateProfitRate(totalPrize,purchaseAmount);
+    public double getProfitRate(Map<Rank, Integer> rankResult, int purchaseAmount) {
+        double totalPrize = lottoService.calculatePrize(rankResult);
+        return lottoService.calculateProfitRate(totalPrize, purchaseAmount);
     }
 }

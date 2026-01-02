@@ -1,12 +1,14 @@
 package lotto.model;
 
-import static lotto.constant.LottoNumberConstant.*;
+import static lotto.constant.LottoNumberConstant.LOTTO_NUMBER_SIZE;
+import static lotto.constant.LottoNumberConstant.LOTTO_PRICE;
+import static lotto.constant.LottoNumberConstant.LOTTO_RANGE_MAX;
+import static lotto.constant.LottoNumberConstant.LOTTO_RANGE_MIN;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import lotto.constant.Rank;
 
 public class LottoService {
@@ -28,7 +30,7 @@ public class LottoService {
                 .toList();
     }
 
-    public List<Lotto> lottoMaker(int lottoCount){
+    public List<Lotto> lottoMaker(int lottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             List<Integer> numbers = makeRandomLottoNumbers();
@@ -39,36 +41,39 @@ public class LottoService {
     }
 
     public Rank determineRank(int matchCount, boolean bonusMatched) {
-        if (matchCount == 6) return Rank.SIX_MATCH;
-        if (matchCount == 5 && bonusMatched) return Rank.FIVE_PLUS_BONUS_MATCH;
-        if (matchCount == 5) return Rank.FIVE_MATCH;
-        if (matchCount == 4) return Rank.FOUR_MATCH;
-        if (matchCount == 3) return Rank.THREE_MATCH;
+        if (matchCount == 6) {
+            return Rank.SIX_MATCH;
+        }
+        if (matchCount == 5 && bonusMatched) {
+            return Rank.FIVE_PLUS_BONUS_MATCH;
+        }
+        if (matchCount == 5) {
+            return Rank.FIVE_MATCH;
+        }
+        if (matchCount == 4) {
+            return Rank.FOUR_MATCH;
+        }
+        if (matchCount == 3) {
+            return Rank.THREE_MATCH;
+        }
         return null;
     }
 
-    public int calculateMatchCount(List<Integer> winningNumber,List<Integer> lotto) {
+    public int calculateMatchCount(List<Integer> winningNumber, List<Integer> lotto) {
         long matchCount = winningNumber.stream()
                 .filter(lotto::contains)
                 .count();
         return (int) matchCount;
     }
 
-    public boolean checkBonusNumber(List<Integer> lotto,int bonusNumber) {
+    public boolean checkBonusNumber(List<Integer> lotto, int bonusNumber) {
         return lotto.contains(bonusNumber);
     }
 
-    private double calculateEntryPrize(Map.Entry<Rank, Integer> entry) {
-        if (entry.getValue() == 0) {
-            return 0;
-        }
-        return entry.getKey().getPrize() * entry.getValue();
-    }
-
-    public double calculateTotalPrize(Map<Rank, Integer> rankResult) {
+    public double calculatePrize(Map<Rank, Integer> rankResult) {
         double totalPrize = 0;
         for (Map.Entry<Rank, Integer> entry : rankResult.entrySet()) {
-            totalPrize += calculateEntryPrize(entry);
+            totalPrize += entry.getKey().getPrize() * entry.getValue();
         }
         return totalPrize;
     }
