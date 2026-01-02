@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.service.LottoService;
 import lotto.util.Parser;
+import lotto.util.Validator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -19,5 +20,18 @@ public class LottoController {
     public void run() {
         String inputPurchaseAmount = inputView.inputPurchaseAmount();
         Integer purchaseAmount = Parser.stringToInt(inputPurchaseAmount);
+    }
+
+    private int getPurchaseAmount() {
+        while (true) {
+            try {
+                String inputPurchaseAmount = inputView.inputPurchaseAmount();
+                int purchaseAmount = Parser.stringToInt(inputPurchaseAmount);
+                Validator.validateMultipleOfThousand(purchaseAmount);
+                return purchaseAmount;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
     }
 }
