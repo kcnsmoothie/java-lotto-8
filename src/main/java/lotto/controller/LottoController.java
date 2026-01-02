@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import java.util.List;
+import lotto.service.Lotto;
 import lotto.service.LottoService;
 import lotto.util.Parser;
 import lotto.util.Validator;
@@ -21,6 +23,10 @@ public class LottoController {
         int purchaseAmount = getPurchaseAmount();
         int lottoAmount = lottoService.calculateLottoAmount(purchaseAmount);
         outputView.printLottoAmount(lottoAmount);
+        List<Lotto> lottos = lottoService.createRandomLotto(lottoAmount);
+        for (Lotto lotto : lottos) {
+            System.out.println(lotto.getNumbers());
+        }
     }
 
     private int getPurchaseAmount() {
