@@ -16,4 +16,16 @@ public class Validator {
             throw new IllegalArgumentException(DEFAULT_MESSAGE.getErrorMessage());
         }
     }
+
+    public static void validateInRange(int inputValue) {
+        if (inputValue < 1 || 45 < inputValue) {
+            throw new IllegalArgumentException(DEFAULT_MESSAGE.getErrorMessage());
+        }
+    }
+
+    public static void validateSize(List<Integer> inputValue) {
+        if (inputValue.size() != 6) {
+            throw new IllegalArgumentException(DEFAULT_MESSAGE.getErrorMessage());
+        }
+    }
 }

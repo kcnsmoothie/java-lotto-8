@@ -27,6 +27,8 @@ public class LottoController {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.getNumbers());
         }
+        List<Integer> winningNumber = getWinningNumber();
+
     }
 
     private int getPurchaseAmount() {
@@ -41,4 +43,24 @@ public class LottoController {
             }
         }
     }
+
+    private List<Integer> getWinningNumber() {
+        while (true) {
+            try {
+                String inputWinningNumber = inputView.inputWinningNumber();
+                List<String> parsedWinningNumber = Parser.parseByDelimeter(inputWinningNumber);
+                List<Integer> winningNumber = Parser.stringToInt(parsedWinningNumber);
+                Validator.validateNotDuplicate(winningNumber);
+                Validator.validateSize(winningNumber);
+                for (int number : winningNumber) {
+                    Validator.validateInRange(number);
+                }
+                return winningNumber;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+    }
+
+
 }
