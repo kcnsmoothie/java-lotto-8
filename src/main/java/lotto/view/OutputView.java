@@ -19,11 +19,11 @@ public class OutputView {
 
     public void printLottoHit(Map<Rank, Integer> rankResult) {
         System.out.println(HEADER.getViewMessage());
-        System.out.println(FIRST_MESSAGE.getViewMessage());
-        System.out.println(SECOND_MESSAGE.getViewMessage());
-        System.out.println(THIRD_MESSAGE.getViewMessage());
-        System.out.println(FOURTH_MESSAGE.getViewMessage());
-        System.out.println(FIFTH_MESSAGE.getViewMessage());
+        System.out.println(FIRST_MESSAGE.getViewMessage(rankResult.getOrDefault(Rank.FIFTH, 0)));
+        System.out.println(SECOND_MESSAGE.getViewMessage(rankResult.getOrDefault(Rank.FOURTH, 0)));
+        System.out.println(THIRD_MESSAGE.getViewMessage(rankResult.getOrDefault(Rank.THIRD, 0)));
+        System.out.println(FOURTH_MESSAGE.getViewMessage(rankResult.getOrDefault(Rank.SECOND, 0)));
+        System.out.println(FIFTH_MESSAGE.getViewMessage(rankResult.getOrDefault(Rank.FIRST, 0)));
     }
 
     public void printProfitRate(double profitRate) {
